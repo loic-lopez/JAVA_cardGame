@@ -1,0 +1,59 @@
+package Protobuf;
+
+option optimize_for = SPEED;
+
+message Request {
+    enum Type {
+        REGISTER = 1;
+        BET = 2;
+        PLAY_A_CARD = 3;
+        DISCONNECT = 4;
+        SEE = 5;
+        HELP = 6;
+        BOARD = 7;
+    }
+    required Type type = 1;
+    repeated string command = 2;
+    required string Username = 3;
+}
+
+message Card {
+    required string color = 1;
+    required string cardName = 2;
+}
+
+message CardInBoard {
+    required string color = 1;
+    required string cardName = 2;
+    required string playerName = 3;
+}
+
+message HelpCommand {
+    required string name = 1;
+    required string description = 2;
+}
+
+message Response {
+    enum Type {
+        WIN = 1;
+        LOSE = 2;
+        REFRESH = 3;
+        RESET_GAME = 4;
+        SUCCESS = 5;
+        FAILED = 6;
+        SUCCESS_REGISTER = 7;
+        SERVER_SHUTDOWN = 8;
+        GAME_ALREADY_STARTED = 9;
+        DISCONNECT = 10;
+        USERNAME_ALREADY_TAKEN = 11;
+        GAME_ACTION  = 12;
+        HAND = 13;
+        HELP = 14;
+        BOARD = 15;
+    }
+    required Type type = 1;
+    required string responseMsg = 2;
+    repeated Card cardsInHand = 3;
+    repeated HelpCommand help = 4;
+    repeated CardInBoard cardInBoard = 5;
+}

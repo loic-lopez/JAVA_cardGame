@@ -1,0 +1,8 @@
+sourceSets {
+    main {
+        proto {
+            // In addition to the default 'src/java/proto'
+            srcDir 'src'
+        }
+    }
+}

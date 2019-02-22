@@ -1,0 +1,42 @@
+dependencies{
+    compile project(':Protocol')
+    testCompile project(':jcoinche-server')
+}
+
+sourceSets {
+    main {
+        java {
+            srcDir 'src/main'
+        }
+    }
+    test {
+        java {
+            srcDir 'src/test'
+        }
+    }
+}
+
+shadowJar {
+    baseName = project.name
+    classifier = null
+    version = null
+}
+
+jar {
+    manifest {
+        attributes 'Main-Class': 'client.Client'
+    }
+}
+
+task copyJar(type: Copy) {
+    from shadowJar // here it automatically reads jar file produced from jar task
+    into '../target'
+}
+
+tasks.create("package") {
+    tasks.getByName('package').dependsOn copyJar
+}
+
+task    cover() {
+    cover.dependsOn cloverGenerateReport
+}

@@ -1,0 +1,5 @@
+rootProject.name = 'Java_jcoinche_2017'
+include 'jcoinche-server'
+include 'jcoinche-client'
+include 'Protocol'
+
